@@ -526,11 +526,14 @@ class Ticket(models.Model):
         """
         from django.contrib.sites.models import Site
         from django.core.urlresolvers import reverse
+        from helpdesk import settings as helpdesk_settings
+        http_protocol = helpdesk_settings.HELPDESK_DEFAULT_HTTP_PROTOCOL
         try:
             site = Site.objects.get_current()
         except:
             site = Site(domain='configure-django-sites.com')
-        return u"http://%s%s?ticket=%s&email=%s" % (
+        return u"%s://%s%s?ticket=%s&email=%s" % (
+            http_protocol,
             site.domain,
             reverse('helpdesk:public_view'),
             self.ticket_for_url,
@@ -545,11 +548,14 @@ class Ticket(models.Model):
         """
         from django.contrib.sites.models import Site
         from django.core.urlresolvers import reverse
+        from helpdesk import settings as helpdesk_settings
+        http_protocol = helpdesk_settings.HELPDESK_DEFAULT_HTTP_PROTOCOL
         try:
             site = Site.objects.get_current()
         except:
             site = Site(domain='configure-django-sites.com')
-        return u"http://%s%s" % (
+        return u"%s://%s%s" % (
+            http_protocol,
             site.domain,
             reverse('helpdesk:view',
                     args=[self.id])

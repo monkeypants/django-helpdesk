@@ -275,13 +275,16 @@ def text_is_spam(text, request):
         from helpdesk.akismet import Akismet
     except:
         return False
+
+    from helpdesk import settings as helpdesk_settings
+    http_protocol = helpdesk_settings.HELPDESK_DEFAULT_HTTP_PROTOCOL
     try:
         site = Site.objects.get_current()
     except:
         site = Site(domain='configure-django-sites.com')
 
     ak = Akismet(
-        blog_url='http://%s/' % site.domain,
+        blog_url='%s://%s/' % (http_protocol, site.domain),
         agent='django-helpdesk',
     )
 

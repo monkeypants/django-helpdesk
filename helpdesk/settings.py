@@ -23,6 +23,16 @@ if not isinstance(DEFAULT_USER_SETTINGS, dict):
 
 HAS_TAG_SUPPORT = False
 
+# the protocol settings to be used for generating links (for example, a link to view a ticket)
+try:
+    HELPDESK_DEFAULT_HTTP_PROTOCOL = getattr(settings,
+                                             'HELPDESK_DEFAULT_HTTP_PROTOCOL').lower()
+except:
+    if getattr(settings, 'SECURE_SSL_REDIRECT'):
+        HELPDESK_DEFAULT_HTTP_PROTOCOL = 'https'
+    else:
+        HELPDESK_DEFAULT_HTTP_PROTOCOL = 'http'
+
 ##########################################
 # generic options - visible on all pages #
 ##########################################
