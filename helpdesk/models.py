@@ -248,9 +248,6 @@ class Queue(models.Model):
         max_length=200,
         blank=True,
         null=True,
-        help_text=_('If logging is enabled, what directory should we use to '
-                    'store log files for this queue? '
-                    'If no directory is set, default to /var/log/helpdesk/'),
     )
 
     default_owner = models.ForeignKey(
