@@ -1,13 +1,27 @@
+from django import forms
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 from helpdesk.models import Queue, Ticket, FollowUp, PreSetReply, KBCategory
 from helpdesk.models import EscalationExclusion, EmailTemplate, KBItem
 from helpdesk.models import TicketChange, Attachment, IgnoreEmail
 from helpdesk.models import CustomField
+from helpdesk import settings as helpdesk_settings
+
+
+class QueueForm(forms.ModelForm):
+    class Meta:
+        model = Queue
+        exclude = []
+        help_texts = {
+            'logging_dir': _('If logging is enabled, what directory should we use to '
+                    'store log files for this queue? '
+                    'If no directory is set, default to ' + helpdesk_settings.HELPDESK_DEFAULT_QUEUE_LOG_PATH)
+        }
 
 
 @admin.register(Queue)
 class QueueAdmin(admin.ModelAdmin):
+    form = QueueForm
     list_display = ('title', 'slug', 'email_address', 'locale')
     prepopulated_fields = {"slug": ("title",)}
 

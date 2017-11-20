@@ -155,3 +155,10 @@ QUEUE_EMAIL_BOX_UPDATE_ONLY = getattr(settings, 'QUEUE_EMAIL_BOX_UPDATE_ONLY', F
 # only allow users to access queues that they are members of?
 HELPDESK_ENABLE_PER_QUEUE_STAFF_PERMISSION = getattr(
     settings, 'HELPDESK_ENABLE_PER_QUEUE_STAFF_PERMISSION', False)
+
+
+#################
+# queue options #
+#################
+
+HELPDESK_DEFAULT_QUEUE_LOG_PATH = getattr(settings, 'HELPDESK_DEFAULT_QUEUE_LOG_PATH', '/tmp/')
