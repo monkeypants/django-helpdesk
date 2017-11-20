@@ -32,16 +32,15 @@ class Command(BaseCommand):
     def __init__(self):
         BaseCommand.__init__(self)
 
-        self.option_list += (
-            make_option(
-                '--queues',
-                help='Queues to include (default: all). Use queue slugs'),
-            make_option(
-                '--verboseescalation',
-                action='store_true',
-                default=False,
-                help='Display a list of dates excluded'),
-        )
+    def add_arguments(self, parser):
+        parser.add_argument(
+            '--queues',
+            help='Queues to include (default: all). Use queue slugs')
+        parser.add_argument(
+            '--verboseescalation',
+            action='store_true',
+            default=False,
+            help='Display a list of dates excluded')
 
     def handle(self, *args, **options):
         verbose = False
