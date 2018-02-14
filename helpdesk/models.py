@@ -666,7 +666,7 @@ class FollowUp(models.Model):
         blank=True,
         null=True,
         verbose_name=_('User'),
-        on_delete=models.SET_NULL
+        on_delete=models.CASCADE,
     )
 
     new_status = models.IntegerField(
@@ -770,7 +770,7 @@ class Attachment(models.Model):
     followup = models.ForeignKey(
         FollowUp,
         verbose_name=_('Follow-up'),
-        on_delete=models.SET_NULL
+        on_delete=models.CASCADE,
     )
 
     file = models.FileField(
@@ -1102,7 +1102,9 @@ class UserSettings(models.Model):
 
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL,
-        related_name="usersettings_helpdesk")
+        related_name="usersettings_helpdesk",
+        on_delete=models.CASCADE,
+    )
 
     settings_pickled = models.TextField(
         _('Settings Dictionary'),

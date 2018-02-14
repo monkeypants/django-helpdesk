@@ -7,7 +7,10 @@ views/public.py - All public facing views, eg non-staff (no authentication
                   required) views.
 """
 from django.core.exceptions import ObjectDoesNotExist
-from django.core.urlresolvers import reverse
+try:
+    from django.core.urlresolvers import reverse
+except ModuleNotFoundError:
+    from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.utils.http import urlquote
